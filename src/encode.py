@@ -112,8 +112,15 @@ def encode_to_btc( key, net, file ):
     else:
         key = PrivateKey( key )
     print('Looking up account balance for', key.address, '...' )
-    if( float(key.get_balance('btc')) < 0.0001 ):
-        print( 'Not enough funds in account', key.address, 'for transaction:\n')
+
+    # get rough estimate of cost at 2 satoshi/byte
+    requiredBalance = len(txouts)*25*2
+    balance =  float(key.get_balance('satoshi'))
+    if( balance < requiredBalance ):
+        print( 'Error: Likely not enough funds in account', key.address, 'for transaction:')
+        print( 'Balance is', balance,'\nEsimated required balanace is', requiredBalance )
+        print('')
+        quit()
     
     # fire off the transaction!
     try: 
