@@ -25,10 +25,9 @@
 from email.mime import image
 import sys
 from utils.transaction import *
-from utils.keys import *
-from utils.ecdsa import *
+from utils.keys import b58encode, address_to_pkb_hash
 from bit import network
-from bit import Key, wif_to_key, PrivateKey, PrivateKeyTestnet
+from bit import Key, PrivateKey, PrivateKeyTestnet
 import argparse
 from io import BytesIO
 
