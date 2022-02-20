@@ -1,3 +1,27 @@
+#
+# BTC Graffiti
+# by Mark Russinovich
+#
+# Copyright (c) 2022 by Mark Russinovich
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
 from email.mime import image
 import sys
 from src.encode import HASH_SIZE
@@ -30,16 +54,35 @@ def decode_txout( txout: TxOut ):
         return None
     return txout.script_pubkey.cmds[2]
 
+#
+# verify_btcgmarker
+#
+def verify_btcgmarker( txouts ):
+    for i in range(len(txouts)):
+        cmds = txouts[i].script_pubkey.cmds
+        if len(cmds) == 2 and isinstance(cmds[0], int) and OP_CODE_NAMES[cmds[0]] == 'OP_RETURN':
+            return txouts[i].script_pubkey.cmds[1]
+    return None
 
 #
 # decode_file
-# decode the transaction outputs into a file
+# decode the transaction outputs into a file.
+# returns the OP_RETURN message
 #
-def decode_file( txouts, file ):
+def decode_file( txouts ):
     filebytes = []
 
-    # ignore last txout which is the miner fee
-    for i in range(len(txouts)-1):
+    # make sure this is one of ours by looking for marker in OP_RETURN
+    btcgmarker = verify_btcgmarker( txouts ) 
+    if btcgmarker == None:
+        print( 'Error: Not a BTC Graffiti transaction.')   
+        quit()
+    filename = str(btcgmarker[5:], 'utf-8')
+    print( 'Writing encoded data to', filename)
+
+    # ignore last two txouts: last one is the OP_RETURN message
+    # and second to last is remainding unspent
+    for i in range(len(txouts)-2):
         filebytes += bytes(decode_txout(txouts[i]))
     filelen = decode_int(BytesIO(bytes(filebytes[0:])), 4)
 
@@ -47,18 +90,20 @@ def decode_file( txouts, file ):
         print('Error: Unrecognized encoding.')
         quit()
     try:
-        f = open(file, 'wb')
+        f = open(filename, 'wb')
         f.write( bytes(filebytes[4:4+filelen]))
+        f.close()
     except IOError as e:
-        print('Error writing ', file, ': ', e )
+        print('Error writing ', filename, ': ', e )
         raise
+    return filename
     
 
 #
 # decode_from_btc
 # decode a transaction to extract media content
 #
-def decode_from_btc( tx, net, file ):
+def decode_from_btc( tx, net ):
     print( 'Reading transaction...')
     if net == 'main':
         txbytestring = NetworkAPI.get_transaction_by_id( tx )
@@ -67,6 +112,6 @@ def decode_from_btc( tx, net, file ):
     txbytes = bytes.fromhex(txbytestring)
     tx = Tx.decode(BytesIO(txbytes))
 
-    print( 'Writing encoded data to file...')
-    decode_file( tx.tx_outs, file )
-    print('Transaction decoded to ', file)
+    # writ to file
+    filename = decode_file( tx.tx_outs )
+    print('Transaction decoded to', str(filename) )
