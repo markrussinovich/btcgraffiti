@@ -19,8 +19,7 @@ from src.encode import encode_to_btc
 # read arguments
 #
 def parse_commandline():
-    parser = argparse.ArgumentParser(description='A script that encodes the specified image and posts a transaction to the Bitcoin blockchain')
-    parser.add_argument(prog='btcgraffiti')
+    parser = argparse.ArgumentParser(prog='btcgraffiti', description='A script that encodes the specified image and posts a transaction to the Bitcoin blockchain')
     parser.add_argument('file', metavar='file', help='name of file to post or to decode into')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--key', "-k", help='Account key' )
@@ -38,7 +37,6 @@ def main():
     args = parse_commandline()
 
     # either encode or decode
-    print(args.prog)
     if args.key != None:
         encode_to_btc( args.key, args.net, args.file )
     else:
