@@ -60,6 +60,13 @@ This is the image saved to satoshi.png:
 
 ![Satoshi.png](/Satoshi.png "Satoshi.png")
 
+## Implementation
+
+BTC-Graffiti uses the Bit Python library for creating and transmitting transactions, and functions from the Cryptos python library for decoding them: 
+
+[Bit Python Library](https://ofek.dev/bit/guide/intro.html)
+[Cryptos Library](https://github.com/karpathy/cryptos)
+
 ## Data on the Bitcoin Blockchain
 
 People have been storing data on the Bitcoin blockchain, starting with Satoshi's genesis block message. Here are some sites and papers that discuss encoding techniques, 
