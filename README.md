@@ -36,7 +36,7 @@ This example downloads a test message BTC-Graffiti stored in a transaction:
     > python btcg-decode.py bd71fc8ceadc75a35f0c96556aabcc24a24bc458e4167969ed62ec7fe1efd024
     
     BTC Graffiti Decoder - by Mark Russinovich (@markrussinovich)
-    Read data from  Bitcoin transaction.
+    Read data from Bitcoin transaction.
 
     Reading transaction...
     Writing encoded data to test.txt...

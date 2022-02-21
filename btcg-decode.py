@@ -57,7 +57,7 @@ def parse_commandline(descriptiontext):
 #
 def main():
     sys.tracebacklimit=0
-    descriptiontext='Read data from  Bitcoin transaction.'
+    descriptiontext='Read data from Bitcoin transaction.'
     print( '\nBTC Graffiti Decoder - by Mark Russinovich (@markrussinovich)')
     print( descriptiontext, '\n')
     args = parse_commandline( descriptiontext )
