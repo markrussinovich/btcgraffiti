@@ -43,7 +43,7 @@ This example downloads a test message BTC-Graffiti stored in a transaction:
     Transaction decoded to test.txt.
     
     > type test.txt
-    BTGC lives forever!
+    BTCG lives forever!
     
 And this transaction is a tribute to Satoshi, storing the abstract for his paper announcing Bitcoin: 
 
