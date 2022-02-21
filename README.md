@@ -59,3 +59,14 @@ And this transaction is a tribute to Satoshi, storing the abstract for his paper
 This is the image saved to satoshi.png:
 
 ![Satoshi.png](/Satoshi.png "Satoshi.png")
+
+## Data on the Bitcoin Blockchain
+
+People have been storing data on the Bitcoin blockchain, starting with Satoshi's genesis block message. Here are some sites and papers that discuss encoding techniques, 
+the implications of data immutability, and give examples of other data encoded on Bitcoin:
+
+ - [Data insertion in Bitcoin's Blockchain](https://digitalcommons.augustana.edu/cgi/viewcontent.cgi?article=1000&context=cscfaculty) This paper describes different techniques for encoding data into Bitcoin transactions. BTC-Graffiti uses the most straightforward technique, albiet one of the more inificient ones. 
+ - [A Quantitative Analysis of the Impact of Arbitrary Blockchain Content on Bitcoin](https://fc18.ifca.ai/preproceedings/6.pdf) A paper from 2018 that explores the benefits and risks of Bitcoin's support for storign arbitray data. 
+ - [Bitcoin's Greatest Feature Is Also Its Existenital Threat](https://www.schneier.com/essays/archives/2021/03/bitcoins-greatest-feature-is-also-its-existential-threat.html) Bruce Schneier's post explores the implications of Bitcoin's blockchain containing objectionable, or even illegal, content. 
+- [Hidden surprises in the Bitcoin blockchain and how they are stored: Nelson Mandela, Wikileaks, photos, and Python software](http://www.righto.com/2014/02/ascii-bernanke-wikileaks-photographs.html) This post points at Bitcoin transactions that have encoded data. 
+- [Edit transactions for blockchains](https://patents.google.com/patent/US10592873B2/en) A design I came up with that would enable a blockahin network like Bitcoin to edit out content while preserving the integrity of the ledger. This wouldn't prevent the data from continuing on in forks and archives, but it would remove it from the fork that agrees to the removal. 
