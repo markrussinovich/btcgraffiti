@@ -1,10 +1,10 @@
 # BTC-Graffiti
 
-BTC-Graffitti is a pair of scripts where btcg-encode encode a specified file into a Bitcoin transaction using the Pay-2-Fake-Hash (P2FS) technique that encodes data 
+BTC-Graffiti is a pair of scripts where btcg-encode encodes a specified file into a Bitcoin transaction using the Pay-2-Fake-Hash (P2FS) technique that encodes data 
 into transaction output script addresses, and btcg-decode extracts the addresses and reconsistitutes the encoded file. The encoder stores the name of the source file 
 in the OP_RETURN and the decode script stores the extracted data to that file name. The data it encodes can be of any format, 
-including text, images, or audio. Content you store this way is **permanent**. Because data BTC-Graffiti posts lives forever on the Bitcoin blockchain,  BTC-Graffiti posts make
-the pefect birtdhay or Valentine's day gift. 
+including text, images, or audio. Content you store this way is **permanent**. Because data BTC-Graffiti posts lives forever on the Bitcoin blockchain, BTC-Graffiti posts make
+the perfect birthday or Valentine's day gift. 
 
 ## Encoding Data
 To encode a file, invoke the encoding script like this:
@@ -76,4 +76,4 @@ the implications of data immutability, and give examples of other data encoded o
  - [A Quantitative Analysis of the Impact of Arbitrary Blockchain Content on Bitcoin](https://fc18.ifca.ai/preproceedings/6.pdf) A paper from 2018 that explores the benefits and risks of Bitcoin's support for storing arbitrary data. 
  - [Bitcoin's Greatest Feature Is Also Its Existenital Threat](https://www.schneier.com/essays/archives/2021/03/bitcoins-greatest-feature-is-also-its-existential-threat.html) Bruce Schneier's post explores the implications of Bitcoin's blockchain containing objectionable, or even illegal, content. 
 - [Hidden surprises in the Bitcoin blockchain and how they are stored: Nelson Mandela, Wikileaks, photos, and Python software](http://www.righto.com/2014/02/ascii-bernanke-wikileaks-photographs.html) This post points at Bitcoin transactions that have encoded data. 
-- [Edit transactions for blockchains](https://patents.google.com/patent/US10592873B2/en) A design I came up with that would enable a blockahin network like Bitcoin to edit out content while preserving the integrity of the ledger. This wouldn't prevent the data from continuing on in forks and archives, but it would remove it from the fork that agrees to the removal. 
+- [Edit transactions for blockchains](https://patents.google.com/patent/US10592873B2/en) A design I came up with that would enable a blockchain network like Bitcoin to edit out content while preserving the integrity of the ledger. This wouldn't prevent the data from continuing on in forks and archives, but it would remove it from the fork that agrees to the removal. 
