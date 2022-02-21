@@ -110,15 +110,7 @@ def encode_to_btc( key, net, file, utxo ):
     else:
         key = PrivateKey( key )
     print('Looking up account balance for {}...'.format( key.address ))
-
-    # get rough estimate of cost at 2 satoshi/byte plus 1
-    # satoshi per output
-    requiredBalance = len(txouts)*35*int(utxo)
     balance =  float(key.get_balance('satoshi'))
-    if( balance < requiredBalance ):
-        print( 'Error: Likely not enough funds in account {} for transaction:'.format(key.address ))
-        print( 'Balance is {}.\nEsimated required balanace is {}'.format(  balance, requiredBalance ))
-        print('')
     
     # fire off the transaction!
     try: 

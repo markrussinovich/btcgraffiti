@@ -33,7 +33,7 @@ import argparse
 from io import BytesIO
 
 # Approximate amount of utxo that mainnet seems to accept
-UTXO_DEFAULT = 350
+UTXO_DEFAULT = 550
 
 # implementation
 from src.decode import decode_from_btc
