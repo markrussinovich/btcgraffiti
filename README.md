@@ -64,8 +64,8 @@ This is the image saved to satoshi.png:
 
 BTC-Graffiti uses the Bit Python library for creating and transmitting transactions, and functions from the Cryptos python library for decoding them: 
 
-[Bit Python Library](https://ofek.dev/bit/guide/intro.html)
-[Cryptos Library](https://github.com/karpathy/cryptos)
+- [Bit Python Library](https://ofek.dev/bit/guide/intro.html)
+- [Cryptos Library](https://github.com/karpathy/cryptos)
 
 ## Data on the Bitcoin Blockchain
 
