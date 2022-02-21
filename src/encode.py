@@ -60,7 +60,7 @@ def base58encode( pkb_hash, net ):
 # take an image byte stream, add a length to the front
 # and encode it into a tx output
 #
-def encode_file( filebytes, net ):
+def encode_file( filebytes, net, utxo ):
     txouts = []
     filelen = len(filebytes)
 
@@ -70,9 +70,7 @@ def encode_file( filebytes, net ):
     for block in range(int((filestreamlen+HASH_SIZE-1)/HASH_SIZE)):
         blockbytes = filestream[block*HASH_SIZE:min(filestreamlen, block*HASH_SIZE+HASH_SIZE)]
         blockbytes = blockbytes + bytes( HASH_SIZE-len(blockbytes))
-        #print( block, '(', len(blockbytes), ')', ': ', blockbytes )
-    
-        txout = (base58encode(blockbytes, net ), 1, 'satoshi')
+        txout = (base58encode(blockbytes, net ), utxo, 'satoshi')
         txouts.append(txout)
     
     return txouts
@@ -87,7 +85,8 @@ def read_file( file ):
         f = open(file, 'rb')
         binarycontent = f.read(-1)  
     except IOError as e:
-        print('Error reading ', file, ': ', e )
+        print('Error reading {}:'.format(file ))
+        print( e )
         raise
     if len(binarycontent) == 0:
         raise("File is zero length")
@@ -97,28 +96,28 @@ def read_file( file ):
 # encode_to_btc
 # Encode a file into a bitcoin transaction and post it
 #
-def encode_to_btc( key, net, file ):
+def encode_to_btc( key, net, file, utxo ):
     # read the input file
-    print('Encoding \'', file, '\'...')
+    print('Encoding \'{}\'...'.format( file))
     filebytes = read_file( file )
 
     # encode image in outputs 
-    txouts = encode_file( filebytes, net )   
+    txouts = encode_file( filebytes, net, utxo )   
 
     # get key
     if net == 'test':
         key = PrivateKeyTestnet( key ) 
     else:
         key = PrivateKey( key )
-    print('Looking up account balance for', key.address, '...' )
+    print('Looking up account balance for {}...'.format( key.address ))
 
     # get rough estimate of cost at 2 satoshi/byte plus 1
     # satoshi per output
-    requiredBalance = len(txouts)*35*2
+    requiredBalance = len(txouts)*35*int(utxo)
     balance =  float(key.get_balance('satoshi'))
     if( balance < requiredBalance ):
-        print( 'Error: Likely not enough funds in account', key.address, 'for transaction:')
-        print( 'Balance is', balance,'\nEsimated required balanace is', requiredBalance )
+        print( 'Error: Likely not enough funds in account {} for transaction:'.format(key.address ))
+        print( 'Balance is {}.\nEsimated required balanace is {}'.format(  balance, requiredBalance ))
         print('')
     
     # fire off the transaction!

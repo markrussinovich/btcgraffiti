@@ -78,7 +78,7 @@ def decode_file( txouts ):
         print( 'Error: Not a BTC Graffiti transaction.')   
         quit()
     filename = str(btcgmarker[5:], 'utf-8')
-    print( 'Writing encoded data to', filename)
+    print( 'Writing encoded data to {}...'.format(filename))
 
     # ignore last two txouts: last one is the OP_RETURN message
     # and second to last is remainding unspent
@@ -94,7 +94,8 @@ def decode_file( txouts ):
         f.write( bytes(filebytes[4:4+filelen]))
         f.close()
     except IOError as e:
-        print('Error writing ', filename, ': ', e )
+        print('Error writing {}:'.format(filename))
+        print(  e )
         raise
     return filename
     
@@ -114,4 +115,4 @@ def decode_from_btc( tx, net ):
 
     # writ to file
     filename = decode_file( tx.tx_outs )
-    print('Transaction decoded to', str(filename) )
+    print('Transaction decoded to {}.'.format(str(filename)))

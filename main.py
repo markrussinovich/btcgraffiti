@@ -32,10 +32,12 @@ from bit import Key, wif_to_key, PrivateKey, PrivateKeyTestnet
 import argparse
 from io import BytesIO
 
+# Approximate amount of utxo that mainnet seems to accept
+UTXO_DEFAULT = 200
+
 # implementation
 from src.decode import decode_from_btc
 from src.encode import encode_to_btc
-
 
 #
 # parse_commandline
@@ -47,6 +49,7 @@ def parse_commandline(descriptiontext):
     parser.add_argument('fileortransaction', metavar='<file|transaction>', help='name of file to post or to decode into')
     parser.add_argument('--key', "-k", help='Account key. Required for encoding data' )
     parser.add_argument('--net', "-n", default='main', choices=['main', 'test'], help='Either \'test\' or \'main\'' )
+    parser.add_argument('--utxo', '-u', help='Amount of Satoshi UTXO to waste on each encoded output. Mainnet can reject small amounts, or \'dust\'')
     args = parser.parse_args()    
     return args
 
@@ -63,7 +66,12 @@ def main():
 
     # either encode or decode
     if args.key != None:
-        encode_to_btc( args.key, args.net, args.fileortransaction )
+        if args.utxo == None:
+            if args.net == 'test':
+                args.utxo = 1
+            else:
+                args.utxo = UTXO_DEFAULT
+        encode_to_btc( args.key, args.net, args.fileortransaction, args.utxo )
     else:
         decode_from_btc( args.fileortransaction, args.net )
     print('')
