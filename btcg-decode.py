@@ -44,12 +44,10 @@ from src.encode import encode_to_btc
 # read arguments
 #
 def parse_commandline(descriptiontext):
-    parser = argparse.ArgumentParser(prog='btcgraffiti', 
+    parser = argparse.ArgumentParser(prog='btcg-decode', 
         description=descriptiontext)
-    parser.add_argument('fileortransaction', metavar='<file|transaction>', help='name of file to post or to decode into')
-    parser.add_argument('--key', "-k", help='Account key. Required for encoding data' )
+    parser.add_argument('transaction', metavar='transaction', help='Transaction to decode.')
     parser.add_argument('--net', "-n", default='main', choices=['main', 'test'], help='Either \'test\' or \'main\'' )
-    parser.add_argument('--utxo', '-u', help='Amount of Satoshi UTXO to waste on each encoded output. Mainnet can reject small amounts, or \'dust\'')
     args = parser.parse_args()    
     return args
 
@@ -59,21 +57,13 @@ def parse_commandline(descriptiontext):
 #
 def main():
     sys.tracebacklimit=0
-    descriptiontext='Write data into Bitcoin transactions and read data from them.'
-    print( '\nBTC Graffiti - by Mark Russinovich (@markrussinovich)')
+    descriptiontext='Read data from  Bitcoin transaction.'
+    print( '\nBTC Graffiti Decoder - by Mark Russinovich (@markrussinovich)')
     print( descriptiontext, '\n')
     args = parse_commandline( descriptiontext )
 
     # either encode or decode
-    if args.key != None:
-        if args.utxo == None:
-            if args.net == 'test':
-                args.utxo = 1
-            else:
-                args.utxo = UTXO_DEFAULT
-        encode_to_btc( args.key, args.net, args.fileortransaction, args.utxo )
-    else:
-        decode_from_btc( args.fileortransaction, args.net )
+    decode_from_btc( args.transaction, args.net )
     print('')
 
 if __name__ == "__main__":
