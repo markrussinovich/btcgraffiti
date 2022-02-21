@@ -14,6 +14,18 @@ To encode a file, invoke the encoding script like this:
 The private key corresponds to the account that holds the Bitcoin the script uses for the transaction and must be in WIF compressed format. An easy way to generate an 
 an address/key pair compatible with the script is to use [bitaddress.org](http://bitaddress.org) and send data from an existing address to that one for use by the script. 
 
+Here's an example command that successfully encoded data:
+
+    > python btcg-encode.py satoshi.png --key #########
+    
+    BTC Graffiti Encoder - by Mark Russinovich (@markrussinovich)
+    Write data into Bitcoin transactions.
+
+    Encoding 'satoshi.png'...
+    Looking up account balance for 1Lc35WwyqSbW4quqY8CNHrVmjUXsK2Xcwq...
+    File encoded to transaction c8a7afbff7d11b3627bb43251843394dfbf26d696e0f475950ac2fd39d5b4c2b
+
+
 ## Decoding Data
 To decode a transaction that has BTC-Graffiti data encoded into it, use the decoding script like this:
 
