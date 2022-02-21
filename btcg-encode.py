@@ -70,7 +70,7 @@ def main():
             args.utxo = 1
         else:
             args.utxo = UTXO_DEFAULT
-    encode_to_btc( args.key, args.net, args.fileortransaction, args.utxo )
+    encode_to_btc( args.key, args.net, args.file, args.utxo )
     print('')
 
 if __name__ == "__main__":
