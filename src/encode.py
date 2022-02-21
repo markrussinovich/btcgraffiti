@@ -128,6 +128,7 @@ def encode_to_btc( key, net, file ):
         btcgmessage='BTGC:'+filepath[1] 
         txid = key.send( txouts, message=btcgmessage )
     except Exception as inst:
+        print( 'Error posting transaction:')
         print( inst )
         return 
     
