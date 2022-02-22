@@ -56,7 +56,9 @@ And this transaction is a tribute to Satoshi, storing the abstract for his paper
     Writing encoded data to satoshi.png...
     Transaction decoded to satoshi.png.
 
-This is the image saved to satoshi.png:
+This is the image saved to satoshi.png and here's a link to details of the transaction: 
+
+[Satoshi.png transaction on blockchain.com](https://www.blockchain.com/btc/tx/c8a7afbff7d11b3627bb43251843394dfbf26d696e0f475950ac2fd39d5b4c2b)
 
 ![Satoshi.png](/Satoshi.png "Satoshi.png")
 
