@@ -1,6 +1,6 @@
 # BTC-Graffiti
 
-BTC-Graffiti is a pair of scripts where btcg-encode encodes a specified file into a Bitcoin transaction using the Pay-2-Fake-Hash (P2FS) technique that encodes data 
+BTC-Graffiti is a pair of scripts where btcg-encode encodes a specified file into a Bitcoin transaction using the Pay-2-Fake-Key-Hash (P2FKH) technique that encodes data 
 into transaction output script addresses, and btcg-decode extracts the addresses and reconsistitutes the encoded file. The encoder stores the name of the source file 
 in the OP_RETURN and the decode script stores the extracted data to that file name. The data it encodes can be of any format, 
 including text, images, or audio. Content you store this way is **permanent**. Because data BTC-Graffiti posts lives forever on the Bitcoin blockchain, BTC-Graffiti posts make
