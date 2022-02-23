@@ -2,17 +2,19 @@
 
 BTC-Graffiti is a pair of scripts where btcg-encode encodes a specified file into a Bitcoin transaction using the Pay-2-Fake-Key-Hash (P2FKH) technique that encodes data 
 into transaction output script addresses, and btcg-decode extracts the addresses and reconsistitutes the encoded file. The encoder stores the name of the source file 
-in the OP_RETURN and the decode script stores the extracted data to that file name. The data it encodes can be of any format, 
-including text, images, or audio. Content you store this way is **permanent**. Because data BTC-Graffiti posts lives forever on the Bitcoin blockchain, BTC-Graffiti posts make
-the perfect birthday or Valentine's day gift. 
+in the OP_RETURN and the decode script stores the extracted data to that file name. Data can be of any format, 
+including text, images, and audio. Content you store this way is **permanent**. 
+
+Because data BTC-Graffiti posts lives forever on the Bitcoin blockchain, BTC-Graffiti posts make
+the perfect birthday or Valentine's day gift!
 
 ## Encoding Data
-To encode a file, invoke the encoding script like this:
+To encode a file, execute the encoding script like this:
 
     > python btcg-encode.py <file> --key KEY [--utxo UTXO] [--net <main|test>]
 
 The private key corresponds to the account that holds the Bitcoin the script uses for the transaction and must be in WIF compressed format. An easy way to generate an 
-an address/key pair compatible with the script is to use [bitaddress.org](http://bitaddress.org) and send data from an existing address to that one for use by the script. 
+an address/key pair compatible with the script is to use [bitaddress.org](http://bitaddress.org) and send data from an existing address to the one you generate. 
 
 Here's an example command that successfully encoded data:
 
@@ -71,7 +73,7 @@ BTC-Graffiti uses the Bit Python library for creating and transmitting transacti
 
 ## Data on the Bitcoin Blockchain
 
-People have been storing data on the Bitcoin blockchain, starting with Satoshi's genesis block message. Here are some sites and papers that discuss encoding techniques, 
+People have been storing data on the Bitcoin blockchain starting with Satoshi's genesis block message. Here are some sites and papers that discuss encoding techniques, 
 the implications of data immutability, and give examples of other data encoded on Bitcoin:
 
  - [Data insertion in Bitcoin's Blockchain](https://digitalcommons.augustana.edu/cgi/viewcontent.cgi?article=1000&context=cscfaculty) This paper describes different techniques for encoding data into Bitcoin transactions. BTC-Graffiti uses the most straightforward technique, albiet one of the more inefficient ones. 
